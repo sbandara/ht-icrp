@@ -18,5 +18,5 @@ High throughput caspase-8 activity assay for the PE Operetta.
   and gently mix by aspiration. 
 
 Export images to cluster with LSF support and initiate analysis
-with ./icrp_launch.sh after after adjusting launch parameters
+with <code>./icrp_launch.sh</code> after after adjusting launch parameters
 in that file.
