@@ -1,7 +1,9 @@
 ht-icrp
 =======
 
-High throughput caspase-8 activity assay for the PE Operetta.
+**High throughput caspase-8 activity assay for the PE Operetta.**
+
+*Experimental Protocol*
 
 - Coat 96-well plate (COSTAR <a href="http://www.sigmaaldrich.com/catalog/product/sigma/cls3603">
   3603</a>) with 50 uL rat tail collagen
@@ -17,6 +19,14 @@ High throughput caspase-8 activity assay for the PE Operetta.
   or other perturbations in at least 100 uL live imaging media
   and gently mix by aspiration. 
 
+*Usage*
+
 Export images to cluster with LSF support and initiate analysis
 with <code>./icrp_launch.sh</code> after after adjusting launch parameters
 within that file.
+
+**Generally useful functions in this release**
+
+- 
+-
+-
