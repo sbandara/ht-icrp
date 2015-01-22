@@ -3,8 +3,6 @@ ht-icrp
 
 **High throughput caspase-8 activity assay for the PE Operetta.**
 
-*Experimental Protocol*
-
 - Coat 96-well plate (COSTAR <a href="http://www.sigmaaldrich.com/catalog/product/sigma/cls3603">
   3603</a>) with 50 uL rat tail collagen
   (Corning <a href="http://catalog2.corning.com/Lifesciences/en-US/Shopping/ProductDetails.aspx?productid=354236(Lifesciences)">#354236</a>, dilute 1:100 in PBS or distilled water) for
@@ -18,8 +16,6 @@ ht-icrp
 - Image cells between 12 and 24 hours after seeding. Add drugs
   or other perturbations in at least 100 uL live imaging media
   and gently mix by aspiration. 
-
-*Usage*
 
 Export images to cluster with LSF support and initiate analysis
 with <code>./icrp_launch.sh</code> after after adjusting launch parameters
