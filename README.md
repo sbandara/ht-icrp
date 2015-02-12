@@ -11,8 +11,11 @@ ht-icrp
 - Seed into up to 36 wells 5000 IC-RP reporter HeLas per well
   in 100 uL imaging media (DMEM w/out phenol red, Life Tech.
   <a href="http://www.lifetechnologies.com/order/catalog/product/21063029">
-  21063-029</a> plus 10% FBS). If you use <a href="http://www.lifetechnologies.com/order/catalog/product/31053028">31053-028</a>, add glutamine (Life Tech. <a href="https://www.lifetechnologies.com/order/catalog/product/25030149">25030-149</a>). Fill surrounding wells with PBS. Let
-  sit in TC hood for 20 minutes before moving plate into incubator.
+  21063-029</a> plus 10% FBS). If you use <a
+  href="http://www.lifetechnologies.com/order/catalog/product/31053028">31053-028</a>,
+  add L-glutamine (Life Tech. <a href="https://www.lifetechnologies.com/order/catalog/product/25030149">25030-149</a>)
+  during media preparation. Fill surrounding wells with PBS. Let sit
+  in TC hood for 20 minutes before moving plate into incubator.
 - Image cells between 12 and 24 hours after seeding. Add drugs
   or other perturbations in at least 100 uL live imaging media
   and gently mix by aspiration. Pre-imaging for 30 min before drug
