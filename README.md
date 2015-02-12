@@ -15,14 +15,12 @@ ht-icrp
   sit in TC hood for 20 minutes before moving plate into incubator.
 - Image cells between 12 and 24 hours after seeding. Add drugs
   or other perturbations in at least 100 uL live imaging media
-  and gently mix by aspiration. 
+  and gently mix by aspiration. Pre-imaging for 30 min before drug
+  addition can help with maturation of fluorophores.
 
 Export images to cluster with LSF support and initiate analysis
 with <code>./icrp_launch.sh</code> after after adjusting launch parameters
-within that file.
-
-**Generally useful functions in this release**
-
-- 
--
--
+within that file. After batch runs complete, use <code>mergesites.m</code>
+to collect results from multisite runs, <code>r0merge.m</code> to attach
+initial RFP fluorescence intensity values, or <code>stitchmat.m</code> to
+connect traces from multiple rounds of imaging.
