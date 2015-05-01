@@ -12,7 +12,7 @@ function rc = icrprun(pth_base, pth_cr, str_row, str_col, str_site)
 row = str2double(str_row);
 col = str2double(str_col);
 fprintf(['registering IC-RP and MOMP-RP files in ', pwd(), '\n']);
-[f, n_frm] = register_path([pth_base, '/', pth_cr], row, col);
+[f, n_frm] = regpath([pth_base, '/', pth_cr], row, col);
 if ~n_frm
     fprintf('no fret images from row%02d col%02d\n', row, col);
     rc = 0;
