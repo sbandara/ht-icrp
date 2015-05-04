@@ -14,12 +14,7 @@ for frm = 1 : n_frm
     for k = 1 : length(f)
       if f(k).row == row && f(k).col == col && f(k).site == site ...
           && f(k).frm == frm
-        try
-          im = single(imread(f(k).name));
-        catch err
-          disp(err.message);
-          keyboard();
-        end
+        im = single(imread(f(k).name));
         if f(k).ch == 2
           % e.g. cfp excitation, yfp emission
           im_A = bgmesh(im, 170, 128);
@@ -32,25 +27,23 @@ for frm = 1 : n_frm
         end
       end
     end
+    res(frm).is_gap = false();
     if isempty(im_A) || isempty(im_B)
-      ex = MException('com.bandara.im:MissingFile', ...
-          'C%02d R%d site %d frame %d');
-      throw(ex);
+        res(frm) = res(frm - 1);
+        res(frm).is_gap = true();
+        continue
     end
     % align channels to correct for chromatic aberration
-    [dx, dy] = get_alignment_shift(im_A, im_B, 5);
-    im_B = shift_image(im_B, dx, dy);
-    [dx, dy] = get_alignment_shift(im_A, im_C, 5);
-    im_C = shift_image(im_C, dx, dy);
+    [dx, dy] = getshift(im_A, im_B, 5);
+    im_B = shiftimg(im_B, dx, dy);
+    [dx, dy] = getshift(im_A, im_C, 5);
+    im_C = shiftimg(im_C, dx, dy);
     % segment nuclei
     t = 5 * prctile(abs(im_C(:)), 30);
     msk = im_C > t;
     msk = bwmorph(msk, 'open', 1);
     [L, num] = bwlabel(msk);
     rp = regionprops(L, 'area', 'centroid');
-    area = [rp.Area];
-    is_tiny = area < 25;
-    %
     c = struct('fr', {}, 'b', {}, 'x', {}, 'y', {}, 'area', {}, ...
 	       'prev', {}, 'next', {}, 'momp', {}, 'edge', {}, ...
                'rfp', {});
@@ -64,6 +57,13 @@ for frm = 1 : n_frm
       c(k).fr = fn(a, b);
       c(k).x = rp(k).Centroid(1);
       c(k).y = rp(k).Centroid(2);
+      if ~isempty(im_C)
+        c(k).momp = momploc(im_A, im_C, ss_msk);
+        c(k).rfp = prctile(im_C(ss_msk), 80);
+      else
+        c(k).momp = nan();
+        c(k).rfp = nan();
+      end
       % extract momp reporter fluorescence at thickest point of cell
       max_a = max(a);
       ss_max = (im_A == max_a) & (ss_msk);
@@ -71,17 +71,17 @@ for frm = 1 : n_frm
       [roi_y, roi_x] = ind2sub(size(ss_max), idx_max);
       % save area of mask
       c(k).area = rp(k).Area;
+      c(k).edge = edginess(ss_msk, im_A, roi_y, roi_x);
     end
     res(frm).t = f(frm).datenum;
     res(frm).c = c;
     fprintf('%d / %d processed\n', frm, n_frm);
     % calculate jitter estimate
-    sc = 0.25;
-    lo_res_A = imresize(im_A, sc);
+    lo_res_A = imresize(im_A, jitter_scale);
     if ~isempty(old_im)
-      [dx, dy] = get_alignment_shift(old_im, lo_res_A, 10);
-      res(frm).dx = dx / sc;
-      res(frm).dy = dy / sc;
+      [dx, dy] = getshift(old_im, lo_res_A, scaled_max_jitter);
+      res(frm).dx = dx / jitter_scale;
+      res(frm).dy = dy / jitter_scale;
     end
     old_im = lo_res_A;
 end
