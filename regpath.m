@@ -24,7 +24,7 @@ if nargin == 3
 else
     varargs = {};    
 end
-if exist(COLUMBUS_INDEX_FILE, 'file')
+if exist([img_path, COLUMBUS_INDEX_FILE], 'file')
     [f, n_frm] = regcolumbus(img_path, varargs{:});
 else
     [f, n_frm] = regharmony(img_path, varargs{:});
