@@ -9,14 +9,25 @@ function [f, n_frm] = regcolumbus(img_path, row, col)
 %   channel, and frame index (order in time), in addition to the name of
 %   the image file. N_FRM is the largest index among all frames. Yvonne
 
-n_frm = 0;
+COLUMBUS_INDEX_FILE = 'ImageIndex.ColumbusIDX.csv';
+idxM = ClbIdx([img_path, COLUMBUS_INDEX_FILE]);
+
+
 f = struct('name', {}, 'row', {}, 'col', {}, 'site', {}, 'ch', {}, ...
     'frm', {});
 
-if nargin == 3
-    % index only images in well (row, col)
-    
-else
-    % index all images
+n = 0;
+for k = 1 : length(idxM)
+    if nargin == 3 && (idxM(k).Row ~= row || idxM(k).Column ~= col)
+        continue
+    end
+    n = n + 1;
+    f(n).row = idxM(k).Row;
+    f(n).col = idxM(k).Column;
+    f(n).name = [img_path, idxM(k).sourcefilename];
+    f(n).site = str2double(idxM(k).Field);
+    f(n).ch = idxM(k).Channel;
+    f(n).frm = str2double(idxM(k).Timepoint);
     
 end
+n_frm = max([f.frm]);

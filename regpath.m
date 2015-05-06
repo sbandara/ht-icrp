@@ -10,7 +10,7 @@ function [f, n_frm] = regpath(img_path, row, col)
 %   The result structure F has fields identifying row, column, site,
 %   channel, and frame index (order in time), in addition to the name of
 %   the image file. N_FRM is the largest index among all frames. Sam
-COLUMBUS_INDEX_FILE = 'columbus-image-index.txt';
+COLUMBUS_INDEX_FILE = 'ImageIndex.ColumbusIDX.csv';
 if nargin == 0
     img_path = pwd();
 end
