@@ -8,5 +8,10 @@ max_a = max(a);
 ss_max = (im_uni == max_a) & ss_msk;
 idx_lin_max = find(ss_max(:), 1, 'first');
 [roi_y, roi_x] = ind2sub(size(ss_max), idx_lin_max);
-roi_momp = im_momp(roi_y - 2 : roi_y + 2, roi_x - 2 : roi_x + 2);
-momp = prctile(roi_momp(:), 5);
+if roi_y - 2 < 1 || roi_x - 2 < 1 || roi_y + 2 > size(im_momp, 1) || ...
+        roi_x + 2 > size(im_momp, 2)
+    momp = nan;
+else 
+    roi_momp = im_momp(roi_y - 2 : roi_y + 2, roi_x - 2 : roi_x + 2);
+    momp = prctile(roi_momp(:), 5);
+end

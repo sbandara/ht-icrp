@@ -14,7 +14,7 @@ idxM = ClbIdx([img_path, COLUMBUS_INDEX_FILE]);
 
 
 f = struct('name', {}, 'row', {}, 'col', {}, 'site', {}, 'ch', {}, ...
-    'frm', {});
+	   'frm', {}, 'datenum', {});
 
 n = 0;
 for k = 1 : length(idxM)
@@ -24,10 +24,9 @@ for k = 1 : length(idxM)
     n = n + 1;
     f(n).row = idxM(k).Row;
     f(n).col = idxM(k).Column;
-    f(n).name = [img_path, idxM(k).sourcefilename];
+    f(n).name = idxM(k).sourcefilename;
     f(n).site = str2double(idxM(k).Field);
     f(n).ch = idxM(k).Channel;
     f(n).frm = str2double(idxM(k).Timepoint);
-    
 end
 n_frm = max([f.frm]);

@@ -54,7 +54,7 @@ for frm = 1 : n_frm
       h2b = im_C(ss_msk);
       c(k).b = median(b);
       c(k).h2b = median(h2b);
-      c(k).fr = fn(a, b);
+      c(k).fr = median(a ./ b);
       c(k).x = rp(k).Centroid(1);
       c(k).y = rp(k).Centroid(2);
       if ~isempty(im_C)
@@ -73,7 +73,7 @@ for frm = 1 : n_frm
       c(k).area = rp(k).Area;
       c(k).edge = edginess(ss_msk, im_A, roi_y, roi_x);
     end
-    res(frm).t = f(frm).datenum;
+    res(frm).t = nan;
     res(frm).c = c;
     fprintf('%d / %d processed\n', frm, n_frm);
     % calculate jitter estimate
