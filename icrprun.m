@@ -20,8 +20,20 @@ if ~n_frm
 end
 n_site = max([f.site]);
 fprintf('%d site(s) in row%02d col%02d\n', n_site, row, col);
-for k = 1 : length(f)
-    f(k).name = [pth_base, '/', pth_cr, '/', f(k).name];
+if pth_base(end) ~= '/'
+    pth_base = [pth_base, '/'];
+end
+if isempty(pth_cr)
+    for k = 1 : length(f)
+        f(k).name = [pth_base, f(k).name];
+    end
+else
+    if pth_cr(end) ~= '/'
+       pth_cr = [pth_cr, '/'];
+    end
+    for k = 1 : length(f)
+        f(k).name = [pth_base, pth_cr, f(k).name];
+    end
 end
 fret = [];
 offset = 0;
