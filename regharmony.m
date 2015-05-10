@@ -16,6 +16,7 @@ f = dir(img_path);
 f = rmfield(f, 'date');
 f = rmfield(f, 'isdir');
 f = rmfield(f, 'bytes');
+f = rmfield(f, 'datenum');
 % File naming convention changed recently, so it could be either of those:
 fmt1 = 'r(\d+)c(\d+)f(\d+)p01rc(\d)-ch1sk(\d+)fk';
 fmt2 = 'r(\d+)c(\d+)f(\d+)p01-ch(\d)sk(\d+)fk';
